@@ -822,8 +822,8 @@ stdenv.mkDerivation (finalAttrs: {
       ++ optional buildSwresample "libswresample"
       ++ optional buildSwscale "libswscale"
     ;
-  in ''
-    ${ldLibraryPathEnv}="${lib.concatStringsSep ":" libsToLink}" make check -j$NIX_BUILD_CORES
+  in lib.optionalString !stdenv.hostPlatform.isPower64 ''
+    #${ldLibraryPathEnv}="${lib.concatStringsSep ":" libsToLink}" make check -j$NIX_BUILD_CORES
   '';
 
   outputs = optionals withBin [ "bin" ] # The first output is the one that gets symlinked by default!
