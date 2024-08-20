@@ -806,7 +806,7 @@ stdenv.mkDerivation (finalAttrs: {
   buildFlags = [ "all" ]
     ++ optional buildQtFaststart "tools/qt-faststart"; # Build qt-faststart executable
 
-  doCheck = stdenv.hostPlatform == stdenv.buildPlatform;
+  doCheck = (stdenv.hostPlatform == stdenv.buildPlatform) && !stdenv.hostPlatform.isPower64;
 
   # Fails with SIGABRT otherwise FIXME: Why?
   checkPhase = let
@@ -822,9 +822,9 @@ stdenv.mkDerivation (finalAttrs: {
       ++ optional buildSwresample "libswresample"
       ++ optional buildSwscale "libswscale"
     ;
-  in (lib.optionalString (!stdenv.hostPlatform.isPower64) ''
+  in ''
     ${ldLibraryPathEnv}="${lib.concatStringsSep ":" libsToLink}" make check -j$NIX_BUILD_CORES
-  '');
+  '';
 
   outputs = optionals withBin [ "bin" ] # The first output is the one that gets symlinked by default!
     ++ optionals withLib [ "lib" "dev" ]
