@@ -1,4 +1,4 @@
-t{ lib
+{ lib
 , stdenv
 , llvm_meta
 , pkgsBuildBuild
