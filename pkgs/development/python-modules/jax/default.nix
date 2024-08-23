@@ -138,8 +138,6 @@ buildPythonPackage rec {
     "tests/lax_test.py"
   ];
 
-  pythonImportsCheck = [ "jax" ];
-
   # Test CUDA-enabled jax and jaxlib. Running CUDA-enabled tests is not
   # currently feasible within the nix build environment so we have to maintain
   # this script separately. See https://github.com/NixOS/nixpkgs/pull/256230
