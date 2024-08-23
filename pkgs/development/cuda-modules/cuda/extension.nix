@@ -70,18 +70,7 @@ let
         }).overrideAttrs
           (prevAttrs: {
             # Add the package-specific license.
-            meta = prevAttrs.meta // {
-              license =
-                let
-                  licensePath =
-                    if redistribRelease.license_path != null then
-                      redistribRelease.license_path
-                    else
-                      "${pname}/LICENSE.txt";
-                  url = "https://developer.download.nvidia.com/compute/cuda/redist/${licensePath}";
-                in
-                lib.licenses.nvidiaCudaRedist // { inherit url; };
-            };
+            meta = prevAttrs.meta;
           });
     in
     drv;
