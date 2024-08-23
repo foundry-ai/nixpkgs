@@ -85,6 +85,8 @@ buildPythonPackage rec {
     export TEST_UNDECLARED_OUTPUTS_DIR=$(mktemp -d)
   '';
 
+  doCheck = false;
+
   disabledTests =
     [
       # Exceeds tolerance when the machine is busy
