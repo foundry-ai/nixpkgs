@@ -21,13 +21,13 @@
         url = "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-ppc64le/cudnn-linux-ppc64le-8.9.7.29_cuda12-archive.tar.xz";
         hash = "sha256-hXTSkbKZ+cwBNDBEc8mTO9CYzHF+jQh29Kup+e6+G3Y=";
       }
-      {
-        version = "9.0.0.312";
-        minCudaVersion = "12.0";
-        maxCudaVersion = "12.2";
-        url = "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-ppc64le/cudnn-linux-ppc64le-9.0.0.312_cuda12-archive.tar.xz";
-        hash = "sha256-uO9vJJEo4ZhYk6h4eiHeNcuD7EfG3G/RgJBh3Zo/+yA=";
-      }
+#      {
+#        version = "9.0.0.312";
+#        minCudaVersion = "12.0";
+#        maxCudaVersion = "12.2";
+#        url = "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-ppc64le/cudnn-linux-ppc64le-9.0.0.312_cuda12-archive.tar.xz";
+#        hash = "sha256-uO9vJJEo4ZhYk6h4eiHeNcuD7EfG3G/RgJBh3Zo/+yA=";
+#      }
     ];
     # server-grade arm
     linux-sbsa = [
