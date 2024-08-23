@@ -63,12 +63,5 @@ finalAttrs: prevAttrs: {
         samuela
         connorbaker
       ]);
-    license = {
-      shortName = "cuDNN EULA";
-      fullName = "NVIDIA cuDNN Software License Agreement (EULA)";
-      url = "https://docs.nvidia.com/deeplearning/sdk/cudnn-sla/index.html#supplement";
-      free = false;
-      redistributable = !finalAttrs.passthru.useCudatoolkitRunfile;
-    };
   };
 }
