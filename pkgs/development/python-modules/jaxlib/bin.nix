@@ -20,7 +20,7 @@
   scipy,
   stdenv,
   # Options:
-  cudaSupport ? config.cudaSupport,
+  cudaSupport ? stdenv.isLinux,
   cudaPackages,
 }:
 
