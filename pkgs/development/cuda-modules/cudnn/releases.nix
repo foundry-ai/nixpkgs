@@ -15,6 +15,13 @@
     # powerpc
     linux-ppc64le = [
       {
+        version = "8.9.7.29";
+        minCudaVersion = "12.0";
+        maxCudaVersion = "12.2";
+        url = "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-ppc64le/cudnn-linux-ppc64le-8.9.7.29_cuda12-archive.tar.xz";
+        hash = "sha256-hXTSkbKZ+cwBNDBEc8mTO9CYzHF+jQh29Kup+e6+G3Y=";
+      }
+      {
         version = "9.0.0.312";
         minCudaVersion = "12.0";
         maxCudaVersion = "12.2";
@@ -265,13 +272,13 @@
         url = "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-x86_64/cudnn-linux-x86_64-8.9.7.29_cuda12-archive.tar.xz";
         hash = "sha256-R1MzYlx+QqevPKCy91BqEG4wyTsaoAgc2cE++24h47s=";
       }
-      {
-        version = "9.0.0.312";
-        minCudaVersion = "12.0";
-        maxCudaVersion = "12.2";
-        url = "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-x86_64/cudnn-linux-x86_64-9.0.0.312_cuda12-archive.tar.xz";
-        hash = "sha256-04kOYJ1lMO5biP+VtgyOaxwex/qWbsUzkl8g+Jb8xjA=";
-      }
+      #{
+      #  version = "9.0.0.312";
+      #  minCudaVersion = "12.0";
+      #  maxCudaVersion = "12.2";
+      #  url = "https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-x86_64/cudnn-linux-x86_64-9.0.0.312_cuda12-archive.tar.xz";
+      #  hash = "sha256-04kOYJ1lMO5biP+VtgyOaxwex/qWbsUzkl8g+Jb8xjA=";
+      #}
       #{
       #  version = "9.3.0.75";
       #  minCudaVersion = "12.0";
