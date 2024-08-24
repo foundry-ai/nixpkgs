@@ -408,7 +408,7 @@ let
           if cudaSupport then
             { 
 		x86_64-linux = "sha256-Uf0VMRE0jgaWEYiuphWkWloZ5jMeqaWBl3lSvk2y1HI=";
-		powerpc64le-linux = "sha256-wTVFoJAqJsaIRajlqv3mXUXUndTMtw3BU8f3GMFPWm8=";
+		powerpc64le-linux = "sha256-vVVi3zZLp1K7yn3q+fvQNCmxWjGidvtP8HpV5DTRWGw=";
 	    }
           else
             {
