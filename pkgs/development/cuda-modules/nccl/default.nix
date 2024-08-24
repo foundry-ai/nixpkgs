@@ -62,8 +62,12 @@ backendStdenv.mkDerivation (finalAttrs: {
     # we'll get incorrect results.
     # For example, lib.versionAtLeast "12.0" "12.0.0" == false.
     ++ lib.optionals (cudaAtLeast "12.0") [ cuda_cccl ];
-
-  env.NIX_CFLAGS_COMPILE = toString [ "-Wno-unused-function" ];
+	  env.NIX_CFLAGS_COMPILE = toString (
+		[ "-Wno-unused-function" ]
+		++ lib.optionals backendStdenv.hostPlatform.isPower64 [ 
+			"-U__LONG_DOUBLE_IEEE128__"
+		]
+	  );
 
   postPatch = ''
     patchShebangs ./src/device/generate.py

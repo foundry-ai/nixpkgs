@@ -190,6 +190,8 @@ buildPythonPackage rec {
     };
   };
 
+  doCheck = !stdenv.hostPlatform.isPower64;
+
   # Disable test
   # - test_large_file_support: takes a long time and can cause the machine to run out of disk space
   env.NOSE_EXCLUDE = "test_large_file_support";

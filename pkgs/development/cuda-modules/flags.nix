@@ -142,7 +142,7 @@ let
     attrsets.attrByPath [ nixSystem ] "unsupported" {
       aarch64-linux = if jetsonTargets != [ ] then "linux-aarch64" else "linux-sbsa";
       x86_64-linux = "linux-x86_64";
-      ppc64le-linux = "linux-ppc64le";
+      powerpc64le-linux = "linux-ppc64le";
       x86_64-windows = "windows-x86_64";
     };
 
@@ -157,7 +157,7 @@ let
       linux-sbsa = "aarch64-linux";
       linux-aarch64 = "aarch64-linux";
       linux-x86_64 = "x86_64-linux";
-      linux-ppc64le = "ppc64le-linux";
+      linux-ppc64le = "powerpc64le-linux";
       windows-x86_64 = "x86_64-windows";
     };
 

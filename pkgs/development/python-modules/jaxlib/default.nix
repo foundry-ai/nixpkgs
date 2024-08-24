@@ -14,6 +14,7 @@
   curl,
   cython,
   fetchFromGitHub,
+  fetchurl,
   git,
   IOKit,
   jsoncpp,
@@ -188,8 +189,23 @@ let
     # KeyError: ('Linux', 'arm64')
     if effectiveStdenv.hostPlatform.isLinux && effectiveStdenv.hostPlatform.linuxArch == "arm64" then
       "aarch64"
+    else if effectiveStdenv.hostPlatform.isLinux && effectiveStdenv.hostPlatform.linuxArch == "powerpc" then
+      "ppc64le"
     else
       effectiveStdenv.hostPlatform.linuxArch;
+
+  boringssl = effectiveStdenv.mkDerivation {
+    pname = "boringssl-src";
+    version = "unstable";
+    src = fetchurl {
+      url = "https://github.com/google/boringssl/archive/b9232f9e27e5668bc0414879dcdedb2a59ea75f2.tar.gz";
+      hash = "sha256-U0+mWL2EX9l0tQsQ9ETTkt/Q2TdoxKUbYSY/032FHEA=";
+    };
+    dontBuild = true;
+    installPhase = ''
+      cp -r . $out
+    '';
+  };
 
   xla = effectiveStdenv.mkDerivation {
     pname = "xla-src";
@@ -316,6 +332,10 @@ let
           build --distinct_host_configuration=false
           build --define PROTOBUF_INCLUDE_PATH="${pkgs.protobuf}/include"
         ''
+      + lib.optionalString effectiveStdenv.hostPlatform.isPower64 ''
+         build --cxxopt="-U__LONG_DOUBLE_IEEE128__"
+         build --host_cxxopt="-U__LONG_DOUBLE_IEEE128__"
+        ''
       + lib.optionalString cudaSupport ''
         build --config=cuda
         build --action_env CUDA_TOOLKIT_PATH="${cuda_build_deps_joined}"
@@ -349,6 +369,7 @@ let
         # See https://bazel.build/external/advanced#overriding-repositories for
         # information on --override_repository flag.
         "--override_repository=xla=${xla}"
+        "--override_repository=boringssl=${boringssl}"
       ]
       ++ lib.optionals effectiveStdenv.cc.isClang [
         # bazel depends on the compiler frontend automatically selecting these flags based on file
@@ -385,7 +406,10 @@ let
       sha256 =
         (
           if cudaSupport then
-            { x86_64-linux = "sha256-Uf0VMRE0jgaWEYiuphWkWloZ5jMeqaWBl3lSvk2y1HI="; }
+            { 
+		x86_64-linux = "sha256-Uf0VMRE0jgaWEYiuphWkWloZ5jMeqaWBl3lSvk2y1HI=";
+		powerpc64le-linux = "sha256-wTVFoJAqJsaIRajlqv3mXUXUndTMtw3BU8f3GMFPWm8=";
+	    }
           else
             {
               x86_64-linux = "sha256-NzJJg6NlrPGMiR8Fn8u4+fu0m+AulfmN5Xqk63Um6sw=";
